@@ -18,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#06080e] text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200">
+    <main className="min-h-screen bg-[#030712] text-slate-100 selection:bg-[#fcee0a] selection:text-black">
       <Navbar />
       <Hero onCopySuccess={handleCopyToast} />
       <BentoAbout />

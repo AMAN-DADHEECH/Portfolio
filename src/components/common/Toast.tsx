@@ -33,21 +33,21 @@ export const Toast: React.FC<ToastProps> = ({
   return (
     <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
       <div
-        className={`flex items-center gap-3 px-4 py-3 rounded-xl border backdrop-blur-xl shadow-2xl ${
+        className={`flex items-center gap-3 px-5 py-3.5 border backdrop-blur-xl shadow-2xl cyber-cut-sm font-mono ${
           isSuccess
-            ? "bg-slate-900/95 border-emerald-500/40 text-emerald-300 shadow-emerald-500/10"
-            : "bg-slate-900/95 border-rose-500/40 text-rose-300 shadow-rose-500/10"
+            ? "bg-[#040814]/95 border-[#00ff66] text-[#00ff66] shadow-[0_0_25px_rgba(0,255,102,0.3)]"
+            : "bg-[#040814]/95 border-[#ff0055] text-[#ff0055] shadow-[0_0_25px_rgba(255,0,85,0.3)]"
         }`}
       >
         {isSuccess ? (
-          <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+          <CheckCircle2 className="w-5 h-5 text-[#00ff66] shrink-0" />
         ) : (
-          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
+          <AlertCircle className="w-5 h-5 text-[#ff0055] shrink-0" />
         )}
-        <span className="text-sm font-medium text-slate-100">{message}</span>
+        <span className="text-xs sm:text-sm font-bold text-white tracking-wide">{message}</span>
         <button
           onClick={onClose}
-          className="ml-2 text-slate-400 hover:text-white p-1 transition-colors"
+          className="ml-2 text-slate-400 hover:text-white p-1 transition-colors cursor-pointer"
           aria-label="Close notification"
         >
           <X className="w-4 h-4" />

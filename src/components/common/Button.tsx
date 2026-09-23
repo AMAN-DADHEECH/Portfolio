@@ -2,7 +2,15 @@ import React from "react";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
 
-export type ButtonVariant = "primary" | "glow" | "secondary" | "outline" | "ghost" | "cyan";
+export type ButtonVariant =
+  | "primary"
+  | "glow"
+  | "secondary"
+  | "outline"
+  | "ghost"
+  | "cyan"
+  | "yellow"
+  | "pink";
 export type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,27 +39,31 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-300 cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden";
+    "inline-flex items-center justify-center font-bold tracking-wide transition-all duration-200 cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden cyber-cut-sm";
 
   const sizeStyles = {
-    sm: "text-xs px-3.5 py-2 gap-1.5",
-    md: "text-sm px-5 py-2.5 gap-2",
-    lg: "text-base px-7 py-3.5 gap-2.5 font-semibold",
+    sm: "text-xs px-3.5 py-2 gap-1.5 font-mono",
+    md: "text-xs sm:text-sm px-5 py-2.5 gap-2 font-mono uppercase tracking-wider",
+    lg: "text-sm sm:text-base px-7 py-3.5 gap-2.5 font-bold uppercase tracking-wider",
   };
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:from-indigo-600 hover:to-indigo-700 active:scale-[0.98]",
+      "bg-[#fcee0a] text-black font-extrabold shadow-[0_0_20px_rgba(252,238,10,0.4)] hover:shadow-[0_0_30px_rgba(252,238,10,0.7)] hover:bg-[#ffe600] active:scale-[0.98]",
+    yellow:
+      "bg-[#fcee0a] text-black font-extrabold shadow-[0_0_20px_rgba(252,238,10,0.4)] hover:shadow-[0_0_30px_rgba(252,238,10,0.7)] hover:bg-[#ffe600] active:scale-[0.98]",
     glow:
-      "bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 text-white shadow-lg shadow-indigo-500/30 hover:shadow-cyan-500/40 hover:brightness-110 active:scale-[0.98]",
+      "bg-gradient-to-r from-[#fcee0a] via-[#00f0ff] to-[#ff0055] text-black font-extrabold shadow-[0_0_25px_rgba(0,240,255,0.45)] hover:shadow-[0_0_35px_rgba(252,238,10,0.6)] hover:brightness-110 active:scale-[0.98]",
     cyan:
-      "bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:from-cyan-600 hover:to-blue-700 active:scale-[0.98]",
+      "bg-[#00f0ff] text-black font-extrabold shadow-[0_0_20px_rgba(0,240,255,0.4)] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] hover:bg-[#33f3ff] active:scale-[0.98]",
+    pink:
+      "bg-[#ff0055] text-white font-extrabold shadow-[0_0_20px_rgba(255,0,85,0.4)] hover:shadow-[0_0_30px_rgba(255,0,85,0.7)] hover:bg-[#ff1a6b] active:scale-[0.98]",
     secondary:
-      "bg-slate-800/80 text-slate-200 border border-slate-700/60 hover:bg-slate-700/80 hover:text-white hover:border-slate-600 active:scale-[0.98]",
+      "bg-[#0c1527] text-cyan-300 border border-cyan-500/40 hover:bg-[#121f38] hover:text-white hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,240,255,0.3)] active:scale-[0.98]",
     outline:
-      "bg-transparent text-slate-200 border border-white/15 hover:border-indigo-400 hover:text-white hover:bg-indigo-500/10 active:scale-[0.98]",
+      "bg-[#060b17]/80 text-slate-200 border border-cyan-500/30 hover:border-[#fcee0a] hover:text-[#fcee0a] hover:shadow-[0_0_18px_rgba(252,238,10,0.3)] active:scale-[0.98]",
     ghost:
-      "bg-transparent text-slate-300 hover:text-white hover:bg-white/5 active:scale-[0.98]",
+      "bg-transparent text-slate-300 hover:text-[#00f0ff] hover:bg-cyan-500/10 active:scale-[0.98]",
   };
 
   const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`;

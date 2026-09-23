@@ -43,16 +43,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
       />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-2xl bg-[#0d121f] border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-10 my-8 animate-in fade-in zoom-in-95 duration-200">
-        {/* Glow Header bar */}
-        <div className="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400" />
+      <div className="relative w-full max-w-2xl bg-[#040814] border border-cyan-500/40 rounded-xl shadow-[0_0_50px_rgba(0,240,255,0.25)] overflow-hidden z-10 my-8 animate-in fade-in zoom-in-95 duration-200 hud-frame">
+        {/* Cyber Hazard Header bar */}
+        <div className="h-2 w-full cyber-hazard-sm" />
 
         <div className="p-6 sm:p-8">
           {/* Top Bar */}
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
               <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <Badge variant="glow" size="sm">
+                <Badge variant="yellow" size="sm">
                   {project.category}
                 </Badge>
                 {project.badge && (
@@ -61,30 +61,32 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   </Badge>
                 )}
               </div>
-              <h3 className="text-2xl font-bold text-white">{project.title}</h3>
+              <h3 className="text-2xl font-black font-mono uppercase text-white tracking-tight">
+                {project.title}
+              </h3>
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+              className="text-slate-400 hover:text-[#ff0055] p-2 bg-[#070c18] border border-cyan-500/30 hover:border-[#ff0055]/50 transition-colors cyber-cut-sm"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
+          <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 font-sans">
             {project.description}
           </p>
 
           {/* Architectural Key Points */}
-          <div className="mb-6 bg-slate-900/60 border border-white/5 rounded-xl p-4 sm:p-5">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-indigo-400 flex items-center gap-2 mb-3">
-              <Cpu className="w-4 h-4" /> Architectural Highlights & Workflows
+          <div className="mb-6 bg-[#070c18] border border-cyan-500/20 rounded-lg p-4 sm:p-5">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#fcee0a] flex items-center gap-2 mb-3">
+              <Cpu className="w-4 h-4 text-[#fcee0a]" /> // Architectural Telemetry & Systems
             </h4>
             <ul className="space-y-2.5">
               {project.features.map((feat, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
+                  <CheckCircle2 className="w-4 h-4 text-[#00ff66] shrink-0 mt-0.5" />
                   <span>{feat}</span>
                 </li>
               ))}
@@ -93,8 +95,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
           {/* Tech Stack */}
           <div className="mb-8">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-2 mb-2.5">
-              <Layers className="w-4 h-4 text-slate-400" /> Technologies & Tools
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2 mb-2.5">
+              <Layers className="w-4 h-4 text-cyan-400" /> // Stack Modules
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
@@ -106,27 +108,27 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-white/10">
+          <div className="flex items-center justify-end gap-3 pt-4 border-t border-cyan-500/20">
             {project.githubUrl && (
               <Button
                 variant="outline"
                 size="md"
                 href={project.githubUrl}
                 external
-                icon={<GithubIcon className="w-4 h-4" />}
+                icon={<GithubIcon className="w-4 h-4 text-cyan-400" />}
               >
-                GitHub Code
+                Repo Source
               </Button>
             )}
             {project.liveUrl && (
               <Button
-                variant="glow"
+                variant="primary"
                 size="md"
                 href={project.liveUrl}
                 external
                 iconRight={<ExternalLink className="w-4 h-4" />}
               >
-                Explore Project
+                Launch Production
               </Button>
             )}
           </div>

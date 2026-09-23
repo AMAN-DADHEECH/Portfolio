@@ -76,28 +76,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
     <section id="contact" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badgeText="Let's Connect"
+          badgeText="[ SEC_04 // SECURE COMMS LINK ]"
+          badgeVariant="yellow"
           badgeIcon={<Sparkles className="w-3.5 h-3.5" />}
-          title="Start a Conversation or"
-          highlightedText="Discuss an Opportunity"
-          subtitle="Whether you're looking for a full-stack engineer, have a project proposal, or want to talk tech architecture—my inbox is always open."
+          title="OPEN TRANSMISSION //"
+          highlightedText="INITIATE CONTACT"
+          subtitle="Looking for a high-performance full-stack engineer, SaaS architect, or technical consultation? Transmit a direct message below."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left Column: Direct Info & Quick Channels */}
           <div className="lg:col-span-5 space-y-5">
             {/* Email Quick Card */}
-            <Card padding="md" className="border border-white/10 hover:border-indigo-500/40">
+            <Card padding="md" hudCorners={true} accent="yellow" className="border border-cyan-500/30 hover:border-[#fcee0a]/60">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+                  <div className="p-2.5 bg-[#fcee0a]/10 border border-[#fcee0a]/30 text-[#fcee0a] cyber-cut-sm">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs text-slate-400 font-mono uppercase">Direct Email</div>
+                    <div className="text-xs text-cyan-400 font-mono uppercase tracking-wider">// Encrypted Direct Email</div>
                     <a
                       href={personal.links.email}
-                      className="text-sm font-semibold text-white hover:text-indigo-400 transition-colors"
+                      className="text-sm font-bold font-mono text-white hover:text-[#fcee0a] transition-colors"
                     >
                       {personal.email}
                     </a>
@@ -105,11 +106,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                 </div>
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 rounded-lg bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:border-indigo-500/50 transition-colors"
+                  className="p-2 bg-[#03060f] border border-cyan-500/30 text-slate-400 hover:text-[#fcee0a] hover:border-[#fcee0a]/50 transition-colors cyber-cut-sm cursor-pointer"
                   title="Copy email to clipboard"
                 >
                   {copiedEmail ? (
-                    <Check className="w-4 h-4 text-emerald-400" />
+                    <Check className="w-4 h-4 text-[#00ff66]" />
                   ) : (
                     <Copy className="w-4 h-4" />
                   )}
@@ -119,46 +120,48 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
 
             {/* Phone & Location */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card padding="sm" className="border border-white/10">
-                <div className="flex items-center gap-2.5 mb-1.5">
-                  <Phone className="w-4 h-4 text-cyan-400" />
-                  <span className="text-xs text-slate-400 font-mono uppercase">Phone</span>
+              <Card padding="sm" hudCorners={true} accent="cyan" className="border border-cyan-500/30">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Phone className="w-4 h-4 text-[#00f0ff]" />
+                  <span className="text-[11px] text-cyan-400 font-mono uppercase tracking-wider">// COMMS</span>
                 </div>
                 <a
                   href={`tel:${personal.phone.replace(/\s+/g, "")}`}
-                  className="text-xs sm:text-sm font-semibold text-white hover:text-cyan-400 transition-colors"
+                  className="text-xs sm:text-sm font-bold font-mono text-white hover:text-[#00f0ff] transition-colors"
                 >
                   {personal.phone}
                 </a>
               </Card>
 
-              <Card padding="sm" className="border border-white/10">
-                <div className="flex items-center gap-2.5 mb-1.5">
-                  <MapPin className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs text-slate-400 font-mono uppercase">Location</span>
+              <Card padding="sm" hudCorners={true} accent="cyan" className="border border-cyan-500/30">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <MapPin className="w-4 h-4 text-[#ff0055]" />
+                  <span className="text-[11px] text-cyan-400 font-mono uppercase tracking-wider">// LOC_COORDS</span>
                 </div>
-                <div className="text-xs sm:text-sm font-semibold text-white">
-                  Jaipur, Rajasthan, India
+                <div className="text-xs sm:text-sm font-bold font-mono text-white">
+                  Jaipur, India [26.9°N]
                 </div>
               </Card>
             </div>
 
             {/* Availability & Timezone Widget */}
-            <Card padding="md" className="border border-white/10 bg-slate-900/40">
+            <Card padding="md" hudCorners={true} accent="cyan" className="border border-cyan-500/30 bg-[#040814]">
               <div className="flex items-center gap-2 mb-2">
-                <Clock className="w-4 h-4 text-indigo-400" />
-                <h4 className="text-sm font-semibold text-white">Work Status &amp; Timezone</h4>
+                <Clock className="w-4 h-4 text-[#fcee0a]" />
+                <h4 className="text-xs font-bold font-mono uppercase tracking-wider text-white">
+                  // TELEMETRY: IST / UTC+5:30
+                </h4>
               </div>
-              <p className="text-xs text-slate-300 mb-3 leading-relaxed">
-                Operating in <strong>India Standard Time (IST / UTC+5:30)</strong> with full flexibility for worldwide asynchronous collaboration.
+              <p className="text-xs text-slate-300 mb-3 leading-relaxed font-sans">
+                Operating in <strong>India Standard Time</strong> with complete availability for worldwide asynchronous teams and sprint delivery.
               </p>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff66] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#00ff66] shadow-[0_0_8px_#00ff66]"></span>
                 </span>
-                <span className="text-xs text-emerald-400 font-medium">
-                  Open to Full-Time, Remote &amp; Hybrid Positions
+                <span className="text-xs font-mono text-[#00ff66] font-semibold">
+                  STATUS: READY FOR ENGAGEMENT
                 </span>
               </div>
             </Card>
@@ -170,7 +173,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                 size="md"
                 href={personal.links.linkedin}
                 external
-                icon={<LinkedinIcon className="w-4 h-4" />}
+                icon={<LinkedinIcon className="w-4 h-4 text-cyan-400" />}
                 className="flex-1"
               >
                 LinkedIn
@@ -180,7 +183,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                 size="md"
                 href={personal.links.github}
                 external
-                icon={<GithubIcon className="w-4 h-4" />}
+                icon={<GithubIcon className="w-4 h-4 text-cyan-400" />}
                 className="flex-1"
               >
                 GitHub
@@ -188,25 +191,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
             </div>
           </div>
 
-          {/* Right Column: Interactive Contact Form */}
+          {/* Right Column: Interactive Cyber Contact Form */}
           <div className="lg:col-span-7">
-            <Card padding="lg" className="border border-white/10 shadow-2xl">
-              <div className="flex items-center gap-2 mb-6">
-                <div className="p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+            <Card padding="lg" hudCorners={true} accent="yellow" className="border border-cyan-500/30 shadow-2xl">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-cyan-500/20">
+                <div className="p-2 bg-[#fcee0a]/10 border border-[#fcee0a]/30 text-[#fcee0a] cyber-cut-sm">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">Send Direct Message</h3>
-                  <p className="text-xs text-slate-400">Quick response within 24 hours</p>
+                  <h3 className="text-xl font-black font-mono uppercase text-white tracking-tight">
+                    TRANSMIT DISPATCH
+                  </h3>
+                  <p className="text-xs font-mono text-cyan-400/80">LATENCY &lt; 24 HOURS // 256-BIT SECURE</p>
                 </div>
               </div>
 
               {statusMessage && (
                 <div
-                  className={`mb-6 p-4 rounded-xl border text-sm flex items-start gap-2.5 ${
+                  className={`mb-6 p-4 border text-xs font-mono flex items-start gap-2.5 cyber-cut-sm ${
                     statusMessage.type === "success"
-                      ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-300"
-                      : "bg-rose-500/10 border-rose-500/30 text-rose-300"
+                      ? "bg-[#00ff66]/10 border-[#00ff66]/40 text-[#00ff66]"
+                      : "bg-[#ff0055]/10 border-[#ff0055]/40 text-[#ff0055]"
                   }`}
                 >
                   <p>{statusMessage.text}</p>
@@ -218,9 +223,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="block text-xs font-mono text-slate-300 mb-1.5"
+                      className="block text-xs font-mono text-cyan-300 mb-1.5 uppercase"
                     >
-                      Your Name *
+                      // IDENTIFIER / NAME *
                     </label>
                     <input
                       id="contact-name"
@@ -230,16 +235,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                       onChange={handleInputChange}
                       required
                       placeholder="e.g. Alex Morgan"
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
                     />
                   </div>
 
                   <div>
                     <label
                       htmlFor="contact-email"
-                      className="block text-xs font-mono text-slate-300 mb-1.5"
+                      className="block text-xs font-mono text-cyan-300 mb-1.5 uppercase"
                     >
-                      Your Email *
+                      // RETURN_COMMS / EMAIL *
                     </label>
                     <input
                       id="contact-email"
@@ -248,8 +253,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      placeholder="e.g. alex@company.com"
-                      className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                      placeholder="e.g. alex@enterprise.com"
+                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
                     />
                   </div>
                 </div>
@@ -257,9 +262,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                 <div>
                   <label
                     htmlFor="contact-subject"
-                    className="block text-xs font-mono text-slate-300 mb-1.5"
+                    className="block text-xs font-mono text-cyan-300 mb-1.5 uppercase"
                   >
-                    Subject *
+                    // DISPATCH_TOPIC / SUBJECT *
                   </label>
                   <input
                     id="contact-subject"
@@ -268,17 +273,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    placeholder="Project Inquiry / Full-Time Role Opportunity"
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+                    placeholder="Project Inquiry / Engineering Contract / Full-Time Role"
+                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-xs font-mono text-slate-300 mb-1.5"
+                    className="block text-xs font-mono text-cyan-300 mb-1.5 uppercase"
                   >
-                    Message *
+                    // PAYLOAD / MESSAGE *
                   </label>
                   <textarea
                     id="contact-message"
@@ -287,20 +292,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    placeholder="Hi Aman, I saw your work on Restroeye and would love to discuss..."
-                    className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all resize-none"
+                    placeholder="Hi Aman, I reviewed your work on Restroeye and would like to collaborate on..."
+                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all resize-none cyber-cut-sm"
                   />
                 </div>
 
                 <Button
                   type="submit"
-                  variant="glow"
+                  variant="primary"
                   size="lg"
                   loading={loading}
-                  icon={<Send className="w-4 h-4" />}
+                  icon={<Send className="w-4 h-4 text-black" />}
                   className="w-full"
                 >
-                  Send Message
+                  TRANSMIT MESSAGE // EXECUTE
                 </Button>
               </form>
             </Card>

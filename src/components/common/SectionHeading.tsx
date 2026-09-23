@@ -14,7 +14,7 @@ interface SectionHeadingProps {
 
 export const SectionHeading: React.FC<SectionHeadingProps> = ({
   badgeText,
-  badgeVariant = "glow",
+  badgeVariant = "yellow",
   badgeIcon,
   title,
   highlightedText,
@@ -27,24 +27,26 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
   return (
     <div
       className={`mb-12 md:mb-16 ${
-        isCenter ? "text-center max-w-2xl mx-auto" : "max-w-2xl"
+        isCenter ? "text-center max-w-3xl mx-auto" : "max-w-3xl"
       } ${className}`}
     >
-      <div className={`mb-3 inline-block ${isCenter ? "mx-auto" : ""}`}>
+      <div className={`mb-3.5 inline-block ${isCenter ? "mx-auto" : ""}`}>
         <Badge variant={badgeVariant} size="md" icon={badgeIcon}>
           {badgeText}
         </Badge>
       </div>
 
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-4 uppercase font-mono">
         {title}{" "}
         {highlightedText && (
-          <span className="gradient-text-accent">{highlightedText}</span>
+          <span className="gradient-text-accent drop-shadow-[0_0_20px_rgba(252,238,10,0.3)]">
+            {highlightedText}
+          </span>
         )}
       </h2>
 
       {subtitle && (
-        <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed">
+        <p className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed font-sans">
           {subtitle}
         </p>
       )}

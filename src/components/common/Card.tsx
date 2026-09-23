@@ -6,6 +6,8 @@ interface CardProps {
   glow?: boolean;
   interactive?: boolean;
   padding?: "none" | "sm" | "md" | "lg";
+  hudCorners?: boolean;
+  accent?: "cyan" | "yellow" | "pink" | "none";
   onClick?: () => void;
 }
 
@@ -15,6 +17,8 @@ export const Card: React.FC<CardProps> = ({
   glow = true,
   interactive = true,
   padding = "md",
+  hudCorners = true,
+  accent = "cyan",
   onClick,
 }) => {
   const paddingStyles = {
@@ -24,15 +28,21 @@ export const Card: React.FC<CardProps> = ({
     lg: "p-8 md:p-10",
   };
 
+  const cornerClasses = hudCorners
+    ? accent === "yellow"
+      ? "hud-frame hud-frame-yellow"
+      : "hud-frame"
+    : "";
+
   return (
     <div
       onClick={onClick}
-      className={`bento-card relative rounded-2xl ${
+      className={`bento-card relative rounded-xl ${cornerClasses} ${
         glow ? "bento-glow" : ""
       } ${interactive ? "cursor-default" : ""} ${paddingStyles[padding]} ${className}`}
     >
-      {/* Subtle top reflection accent */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent pointer-events-none" />
+      {/* Top cyber scan/highlight line */}
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent pointer-events-none" />
       {children}
     </div>
   );

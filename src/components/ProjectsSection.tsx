@@ -34,27 +34,28 @@ export const ProjectsSection: React.FC = () => {
     <section id="projects" className="py-20 md:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          badgeText="Featured Work & Production Systems"
+          badgeText="[ SEC_02 // DEPLOYED WORK & SYSTEMS ]"
+          badgeVariant="yellow"
           badgeIcon={<Sparkles className="w-3.5 h-3.5" />}
-          title="Engineered for"
-          highlightedText="Impact & Reliability"
-          subtitle="A showcase of real-world SaaS platforms, multi-tenant architectures, and scalable full-stack applications."
+          title="MISSION-CRITICAL"
+          highlightedText="PRODUCTION PLATFORMS"
+          subtitle="Real-world multi-tenant SaaS platforms, distributed real-time transactional workflows, and high-performance full-stack applications."
         />
 
         {/* Category Filters */}
         <div className="flex justify-center mb-12">
-          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="flex items-center gap-1.5 p-1.5 bg-[#070c18] border border-cyan-500/30 cyber-cut-sm shadow-[0_0_20px_rgba(0,240,255,0.1)]">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                className={`px-4 py-1.5 text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white shadow-lg shadow-indigo-500/25"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                    ? "bg-[#fcee0a] text-black shadow-[0_0_15px_rgba(252,238,10,0.5)]"
+                    : "text-slate-300 hover:text-[#00f0ff] hover:bg-cyan-500/10"
                 }`}
               >
-                {cat}
+                [ {cat} ]
               </button>
             ))}
           </div>
@@ -62,21 +63,26 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-          {filteredProjects.map((project) => (
+          {filteredProjects.map((project, idx) => (
             <Card
               key={project.id}
               padding="none"
-              className="flex flex-col justify-between group overflow-hidden border border-white/10 hover:border-indigo-500/40"
+              hudCorners={true}
+              accent={idx % 2 === 0 ? "yellow" : "cyan"}
+              className="flex flex-col justify-between group overflow-hidden border border-cyan-500/30 hover:border-[#fcee0a]/60 hover:shadow-[0_0_25px_rgba(252,238,10,0.2)]"
             >
-              {/* Card Top Accent Glow Bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+              {/* Card Top Cyber Hazard Caution Bar */}
+              <div className="h-1.5 w-full cyber-hazard-sm opacity-70 group-hover:opacity-100 transition-opacity" />
 
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                 <div>
                   {/* Category & Badge Header */}
                   <div className="flex items-center justify-between gap-3 mb-4">
                     <div className="flex items-center gap-2">
-                      <Badge variant="glow" size="sm">
+                      <span className="text-[10px] font-mono text-[#fcee0a] border border-[#fcee0a]/40 px-1.5 py-0.5">
+                        [ PRJ_0{idx + 1} ]
+                      </span>
+                      <Badge variant="yellow" size="sm">
                         {project.category}
                       </Badge>
                       {project.badge && (
@@ -87,33 +93,33 @@ export const ProjectsSection: React.FC = () => {
                     </div>
                     <button
                       onClick={() => setActiveModalProject(project)}
-                      className="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 font-medium transition-colors cursor-pointer"
+                      className="text-xs font-mono text-[#00f0ff] hover:text-[#fcee0a] flex items-center gap-1 font-semibold transition-colors cursor-pointer"
                     >
-                      View Specs <ArrowUpRight className="w-3.5 h-3.5" />
+                      SPEC_SHEET <ArrowUpRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
                   {/* Title & Tagline */}
                   <h3
                     onClick={() => setActiveModalProject(project)}
-                    className="text-xl sm:text-2xl font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors cursor-pointer"
+                    className="text-xl sm:text-2xl font-black font-mono uppercase text-white mb-2 group-hover:text-[#fcee0a] transition-colors cursor-pointer tracking-tight"
                   >
                     {project.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-cyan-400 font-mono mb-4">
+                  <p className="text-xs sm:text-sm text-cyan-300 font-mono mb-4">
                     {project.tagline}
                   </p>
 
                   {/* Description */}
-                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6">
+                  <p className="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 font-sans">
                     {project.description}
                   </p>
 
                   {/* Key Features Bullet List */}
-                  <div className="mb-6 space-y-2 bg-[#090d16]/70 rounded-xl p-3.5 border border-white/5">
-                    {project.features.slice(0, 2).map((feat, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-xs text-slate-300">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                  <div className="mb-6 space-y-2.5 bg-[#03060f] p-3.5 border border-cyan-500/20 cyber-cut-sm">
+                    {project.features.slice(0, 2).map((feat, fIdx) => (
+                      <div key={fIdx} className="flex items-start gap-2 text-xs text-slate-300 font-mono">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[#00ff66] shrink-0 mt-0.5" />
                         <span className="line-clamp-2">{feat}</span>
                       </div>
                     ))}
@@ -122,7 +128,7 @@ export const ProjectsSection: React.FC = () => {
 
                 {/* Footer Tech Stack & Links */}
                 <div>
-                  <div className="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-white/5">
+                  <div className="flex flex-wrap gap-1.5 mb-6 pt-4 border-t border-cyan-500/20">
                     {project.technologies.slice(0, 6).map((tech) => (
                       <Badge key={tech} variant="subtle" size="sm">
                         {tech}
@@ -142,7 +148,7 @@ export const ProjectsSection: React.FC = () => {
                       onClick={() => setActiveModalProject(project)}
                       className="flex-1"
                     >
-                      Deep Dive
+                      Specs Dossier
                     </Button>
                     {project.githubUrl && (
                       <Button
@@ -150,14 +156,14 @@ export const ProjectsSection: React.FC = () => {
                         size="sm"
                         href={project.githubUrl}
                         external
-                        icon={<GithubIcon className="w-3.5 h-3.5" />}
+                        icon={<GithubIcon className="w-3.5 h-3.5 text-cyan-400" />}
                       >
                         Code
                       </Button>
                     )}
                     {project.liveUrl && (
                       <Button
-                        variant="glow"
+                        variant="primary"
                         size="sm"
                         href={project.liveUrl}
                         external
