@@ -47,7 +47,18 @@ Vercel is created by the makers of Next.js and requires zero configuration.
 5. Netlify will auto-detect Next.js:
    - **Build command**: `npm run build`
    - **Publish directory**: `.next`
-6. Click **"Deploy site"**.
+### Step 3: Add Environment Variables in Netlify (Essential for Contact Form)
+Before or immediately after deploying, add your contact form email variables:
+1. Go to your site dashboard in Netlify.
+2. Navigate to **Site configuration** (or **Site settings**) → **Environment variables**.
+3. Click **"Add a variable"** → **"Import from a .env file"** (or add one by one):
+   ```env
+   SMTP_USER=work.amandadheech2005@gmail.com
+   SMTP_PASS=wbsx accf miwe igiv
+   CONTACT_RECEIVER_EMAIL=work.amandadheech2005@gmail.com
+   ```
+4. Set Scopes to: **All scopes** (Builds, Functions, Post-processing).
+5. If the site was already built, click **"Trigger deploy"** → **"Clear cache and deploy site"** so Netlify loads the new variables into the Next.js serverless functions.
 
 ---
 

@@ -3,6 +3,7 @@ export interface ContactPayload {
   email: string;
   subject: string;
   message: string;
+  _gotcha?: string;
 }
 
 export interface ContactResponse {
@@ -16,7 +17,7 @@ export const contactService = {
       return { isValid: false, error: "Please enter your full name." };
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!payload.email.trim() || !emailRegex.test(payload.email)) {
+    if (!payload.email.trim() || !emailRegex.test(payload.email.trim())) {
       return { isValid: false, error: "Please enter a valid email address." };
     }
     if (!payload.subject.trim()) {
@@ -35,19 +36,43 @@ export const contactService = {
     }
 
     try {
-      // Simulate real async API call or Formspree integration
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // Save locally or can be pointed to Formspree endpoint (https://formspree.io/f/YOUR_FORM_ID)
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: payload.name.trim(),
+          email: payload.email.trim(),
+          subject: payload.subject.trim(),
+          message: payload.message.trim(),
+          _gotcha: payload._gotcha || "",
+        }),
+      });
+
+      const data = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        return {
+          success: false,
+          message:
+            data?.message ||
+            "Failed to transmit message to Aman. Please email directly at work.amandadheech2005@gmail.com",
+        };
+      }
+
       return {
         success: true,
-        message: "Thank you for reaching out, Aman! Your message has been sent successfully. I will get back to you shortly.",
+        message:
+          data?.message ||
+          `Transmission received, ${payload.name}! Your message was successfully sent.`,
       };
     } catch (err) {
-      console.error("Contact service error:", err);
+      console.error("Contact service network error:", err);
       return {
         success: false,
-        message: "Failed to send your message. Please try emailing directly at work.amandadheech2005@gmail.com",
+        message:
+          "Network connection error. Please check your connection or email directly at work.amandadheech2005@gmail.com",
       };
     }
   },

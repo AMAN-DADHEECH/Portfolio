@@ -31,6 +31,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
     email: "",
     subject: "",
     message: "",
+    _gotcha: "",
   });
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<{
@@ -66,7 +67,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
     setLoading(false);
     if (response.success) {
       setStatusMessage({ text: response.message, type: "success" });
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", subject: "", message: "", _gotcha: "" });
     } else {
       setStatusMessage({ text: response.message, type: "error" });
     }
@@ -219,6 +220,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
               )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Anti-spam honeypot - invisible to humans, catches automated bots */}
+                <div className="hidden" aria-hidden="true">
+                  <label htmlFor="contact-gotcha">Do not fill this field</label>
+                  <input
+                    id="contact-gotcha"
+                    type="text"
+                    name="_gotcha"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData._gotcha || ""}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
@@ -234,8 +249,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                       value={formData.name}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       placeholder="e.g. Alex Morgan"
-                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
+                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
 
@@ -253,8 +269,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                       value={formData.email}
                       onChange={handleInputChange}
                       required
+                      disabled={loading}
                       placeholder="e.g. alex@enterprise.com"
-                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
+                      className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm disabled:opacity-50 disabled:cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -273,8 +290,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
+                    disabled={loading}
                     placeholder="Project Inquiry / Engineering Contract / Full-Time Role"
-                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm"
+                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all cyber-cut-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -292,8 +310,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    disabled={loading}
                     placeholder="Hi Aman, I reviewed your work on Restroeye and would like to collaborate on..."
-                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all resize-none cyber-cut-sm"
+                    className="w-full px-4 py-2.5 bg-[#03060f] border border-cyan-500/30 text-white font-mono text-sm placeholder-slate-500 focus:outline-none focus:border-[#fcee0a] focus:ring-1 focus:ring-[#fcee0a] transition-all resize-none cyber-cut-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   />
                 </div>
 
@@ -302,10 +321,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopySuccess })
                   variant="primary"
                   size="lg"
                   loading={loading}
+                  disabled={loading}
                   icon={<Send className="w-4 h-4 text-black" />}
                   className="w-full"
                 >
-                  TRANSMIT MESSAGE // EXECUTE
+                  {loading ? "TRANSMITTING DISPATCH..." : "TRANSMIT MESSAGE // EXECUTE"}
                 </Button>
               </form>
             </Card>
