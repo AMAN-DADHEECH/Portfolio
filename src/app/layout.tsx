@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { ScrollTint } from "@/components/common/ScrollTint";
+import { GemBackdrop } from "@/components/three/GemBackdrop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,6 +78,7 @@ export default function RootLayout({
     >
       <body suppressHydrationWarning className="text-ink antialiased">
         <ScrollTint />
+        <GemBackdrop />
         <div className="scroll-progress" aria-hidden="true" />
         {children}
       </body>

@@ -3,7 +3,9 @@
 import React, { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { BentoAbout } from "@/components/BentoAbout";
+import { AboutSection } from "@/components/AboutSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { MotionConfig } from "motion/react";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { ContactSection } from "@/components/ContactSection";
@@ -18,10 +20,12 @@ export default function Home() {
   };
 
   return (
+    <MotionConfig reducedMotion="user">
     <main className="relative min-h-screen overflow-x-clip text-ink">
       <Navbar />
       <Hero onCopySuccess={handleCopyToast} />
-      <BentoAbout />
+      <AboutSection />
+      <SkillsSection />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection onCopySuccess={handleCopyToast} />
@@ -33,5 +37,6 @@ export default function Home() {
         onClose={() => setToastMessage(null)}
       />
     </main>
+    </MotionConfig>
   );
 }

@@ -277,6 +277,13 @@ body {
   animation: flow-spin 5s linear infinite;
 }
 
+/* Outlined display numerals (experience years) */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--edge) / 0.75);
+  text-shadow: 0 0 30px rgb(var(--edge) / 0.15);
+}
+
 /* ---------- Text & fills ---------- */
 .text-gilded {
   background: linear-gradient(100deg, #9c7726 0%, #f6e3a1 30%, #d9b45a 50%, #fff4cf 70%, #9c7726 100%);

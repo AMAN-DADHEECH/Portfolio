@@ -139,10 +139,10 @@ export const Hero: React.FC<HeroProps> = ({ onCopySuccess }) => {
 
           {/* Right: portrait in a gold arch, with the watch floating over its lower-left edge */}
           <div
-            className="lg:col-span-6 min-w-0 pb-24 lg:pb-16 animate-fade-up"
+            className="lg:col-span-6 min-w-0 pb-28 lg:pb-24 animate-fade-up"
             style={{ animationDelay: "200ms" }}
           >
-            <div className="relative mx-auto w-[min(66vw,300px)] sm:w-[320px] lg:w-[360px] translate-x-[20%] sm:translate-x-[16%] lg:translate-x-[14%]">
+            <div className="relative mx-auto w-[min(66vw,300px)] sm:w-[320px] lg:w-[360px] translate-x-[24%] sm:translate-x-[20%] lg:translate-x-[22%]">
               {/* slow-turning golden halo */}
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] aspect-square rounded-full opacity-35 blur-3xl animate-spin-slow"
@@ -181,7 +181,7 @@ export const Hero: React.FC<HeroProps> = ({ onCopySuccess }) => {
               </div>
 
               {/* The watch */}
-              <div className="absolute z-10 w-[60%] lg:w-[72%] aspect-[320/600] -left-[42%] lg:-left-[52%] -bottom-[24%] lg:-bottom-[26%]">
+              <div className="absolute z-10 w-[68%] lg:w-[84%] aspect-[320/600] -left-[48%] lg:-left-[58%] -bottom-[30%] lg:-bottom-[32%]">
                 <LuxuryWatch className="h-full w-full animate-float drop-shadow-[0_30px_35px_rgba(0,0,0,0.95)]" />
               </div>
             </div>

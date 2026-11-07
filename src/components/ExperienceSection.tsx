@@ -1,98 +1,87 @@
 "use client";
 
-import React from "react";
-import { Calendar, MapPin, Check } from "lucide-react";
+import React, { useRef } from "react";
+import { motion, useScroll, useSpring } from "motion/react";
+import { MapPin } from "lucide-react";
 import { portfolioService } from "@/services/portfolioService";
-import { Card } from "./common/Card";
-import { Badge } from "./common/Badge";
-import { SectionHeading } from "./common/SectionHeading";
+import { ChapterHeading, FadeIn } from "./motion/Motion";
+
+const yearOf = (period: string) => period.match(/\d{4}/)?.[0] ?? "";
 
 export const ExperienceSection: React.FC = () => {
   const experiences = portfolioService.getExperiences();
+  const ref = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.75", "end 0.55"] });
+  const draw = useSpring(scrollYProgress, { stiffness: 90, damping: 22 });
 
   return (
-    <section id="experience" className="py-20 md:py-28 relative">
+    <section id="experience" className="relative py-24 md:py-36">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          badgeText="Experience"
+        <ChapterHeading
+          index="04"
+          label="Experience"
           title="Where I've"
-          highlightedText="shipped"
-          subtitle="Contributions to commercial SaaS platforms, production multi-tenancy and agile product teams."
+          highlight="shipped"
+          note="Contributions to commercial SaaS platforms, production multi-tenancy and agile product teams."
         />
 
-        <div className="relative max-w-4xl mx-auto">
-          {/* Rail: left on mobile, centred on md+ */}
-          <div
-            className="absolute top-2 bottom-2 left-[11px] md:left-1/2 md:-translate-x-1/2 w-px bg-gradient-to-b from-gold/60 via-champagne/40 to-transparent"
+        <ol ref={ref} className="relative">
+          {/* rail: faint track + gold line that draws with the scroll */}
+          <span className="absolute top-0 bottom-0 left-[7px] lg:left-[calc(33.333%-1px)] w-px bg-line" aria-hidden="true" />
+          <motion.span
             aria-hidden="true"
+            style={{ scaleY: draw }}
+            className="absolute top-0 bottom-0 left-[7px] lg:left-[calc(33.333%-1px)] w-px origin-top bg-gradient-to-b from-[rgb(var(--edge-light))] via-[rgb(var(--edge))] to-[rgb(var(--edge-deep))] shadow-[0_0_12px_rgb(var(--edge)/0.7)]"
           />
 
-          <ol className="space-y-8 md:space-y-14">
-            {experiences.map((exp, idx) => {
-              const isEven = idx % 2 === 0;
-              const isCurrent = idx === 0;
+          {experiences.map((exp, i) => (
+            <li key={exp.id} className="relative grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-0 pb-20 last:pb-0 pl-10 lg:pl-0">
+              {/* node */}
+              <motion.span
+                aria-hidden="true"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true, margin: "-35% 0px" }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                className="absolute left-0 lg:left-[calc(33.333%-8px)] top-3 h-[15px] w-[15px] rounded-full border-2 border-[rgb(var(--edge))] bg-black shadow-[0_0_16px_rgb(var(--edge)/0.8)]"
+              />
 
-              return (
-                <li
-                  key={exp.id}
-                  className={`relative pl-10 md:pl-0 md:flex ${isEven ? "md:flex-row-reverse" : ""}`}
-                >
-                  {/* Node */}
-                  <span
-                    className="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-6 grid place-items-center h-[23px] w-[23px] rounded-full bg-canvas border border-line-strong"
-                    aria-hidden="true"
-                  >
-                    <span
-                      className={`h-2.5 w-2.5 rounded-full ${
-                        isCurrent ? "bg-gilded shadow-[0_0_12px_rgba(212,175,55,0.8)]" : "bg-ink-dim"
-                      }`}
-                    />
+              {/* year + period */}
+              <FadeIn className="lg:pr-14 lg:text-right">
+                <div className="font-display text-7xl sm:text-8xl leading-none text-outline">{yearOf(exp.period)}</div>
+                <div className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-ink-dim">{exp.period}</div>
+                {i === 0 && (
+                  <span className="mt-4 inline-flex items-center gap-2 text-xs text-mint">
+                    <span className="h-1.5 w-1.5 rounded-full bg-mint animate-pulse" /> Current role
                   </span>
+                )}
+              </FadeIn>
 
-                  <div className="w-full md:w-1/2 md:px-10">
-                    <Card padding="md" accent={isCurrent ? "gold" : "none"}>
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <h3 className="text-lg font-semibold tracking-tight text-ink">{exp.company}</h3>
-                        <Badge variant={isCurrent ? "emerald" : "subtle"} size="sm">
-                          {exp.type}
-                        </Badge>
-                      </div>
-                      <p className="text-sm font-medium text-gold mb-3">{exp.role}</p>
+              {/* details */}
+              <FadeIn className="lg:col-span-2 lg:pl-14" delay={0.1}>
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                  <h3 className="font-display text-4xl sm:text-5xl text-ink">{exp.company}</h3>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-dim">{exp.type}</span>
+                </div>
+                <p className="mt-2 text-lg text-[rgb(var(--edge-light))]">{exp.role}</p>
+                <p className="mt-1 inline-flex items-center gap-1.5 text-sm text-ink-dim">
+                  <MapPin className="w-3.5 h-3.5" /> {exp.location}
+                </p>
 
-                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-ink-dim mb-5">
-                        <span className="inline-flex items-center gap-1.5">
-                          <Calendar className="w-3.5 h-3.5" />
-                          {exp.period}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5" />
-                          {exp.location}
-                        </span>
-                      </div>
+                <ul className="mt-7 space-y-4">
+                  {exp.description.map((item, j) => (
+                    <FadeIn as="li" key={j} delay={0.05 * j} y={14} className="flex gap-4 text-[15px] leading-relaxed text-ink-muted">
+                      <span className="mt-[0.7em] h-px w-5 shrink-0 bg-[rgb(var(--edge))]" />
+                      <span>{item}</span>
+                    </FadeIn>
+                  ))}
+                </ul>
 
-                      <ul className="space-y-2.5 mb-5">
-                        {exp.description.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2.5 text-sm text-ink-muted leading-relaxed">
-                            <span className="mt-1 grid place-items-center h-4 w-4 rounded-full bg-mint/15 shrink-0">
-                              <Check className="w-2.5 h-2.5 text-mint" />
-                            </span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      <div className="pt-4 border-t border-line flex flex-wrap gap-1.5">
-                        {exp.skills.map((skill) => (
-                          <Badge key={skill} variant="subtle" size="sm">{skill}</Badge>
-                        ))}
-                      </div>
-                    </Card>
-                  </div>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+                <p className="mt-7 font-mono text-xs leading-relaxed text-ink-dim">{exp.skills.join("  ·  ")}</p>
+              </FadeIn>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
