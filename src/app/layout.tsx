@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+import { ScrollTint } from "@/components/common/ScrollTint";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -10,6 +11,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -50,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#030712",
+  themeColor: "#07070d",
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
@@ -65,12 +73,11 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} scroll-smooth dark`}
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} dark`}
     >
-      <body
-        suppressHydrationWarning
-        className="bg-[#030712] text-slate-100 antialiased selection:bg-[#fcee0a] selection:text-black"
-      >
+      <body suppressHydrationWarning className="text-ink antialiased">
+        <ScrollTint />
+        <div className="scroll-progress" aria-hidden="true" />
         {children}
       </body>
     </html>

@@ -21,33 +21,33 @@ export interface ThemeConfig {
 }
 
 export const defaultTheme: ThemeConfig = {
-  name: "Obsidian Neon Glow",
+  name: "Aurora Glass",
   colors: {
-    background: "#07090e",
-    surface: "#0e131f",
-    surfaceHover: "#151d30",
-    surfaceGlass: "rgba(14, 19, 31, 0.72)",
+    background: "#07070d",
+    surface: "rgba(255, 255, 255, 0.035)",
+    surfaceHover: "rgba(255, 255, 255, 0.06)",
+    surfaceGlass: "rgba(11, 11, 20, 0.7)",
     border: "rgba(255, 255, 255, 0.08)",
-    borderHighlight: "rgba(99, 102, 241, 0.35)",
-    primary: "#6366f1", // Indigo
-    primaryGlow: "rgba(99, 102, 241, 0.25)",
-    secondary: "#06b6d4", // Cyan
-    accent: "#8b5cf6", // Violet
-    accentGlow: "rgba(139, 92, 246, 0.3)",
-    textPrimary: "#f8fafc",
-    textSecondary: "#94a3b8",
-    textMuted: "#64748b",
-    success: "#10b981",
-    warning: "#f59e0b",
+    borderHighlight: "rgba(255, 255, 255, 0.16)",
+    primary: "#a78bfa", // Violet
+    primaryGlow: "rgba(167, 139, 250, 0.25)",
+    secondary: "#7dd3fc", // Sky
+    accent: "#6ee7b7", // Mint
+    accentGlow: "rgba(110, 231, 183, 0.3)",
+    textPrimary: "#ecebf5",
+    textSecondary: "#a3a3b8",
+    textMuted: "#6e6e85",
+    success: "#6ee7b7",
+    warning: "#fcd34d",
   },
 };
 
 export const themeService = {
   getTheme: () => defaultTheme,
   
-  getAccentGradient: () => "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%)",
+  getAccentGradient: () => "linear-gradient(100deg, #a78bfa 0%, #7dd3fc 50%, #6ee7b7 100%)",
   
-  getGlowStyle: (color: string = "rgba(99, 102, 241, 0.15)") => ({
+  getGlowStyle: (color: string = "rgba(167, 139, 250, 0.15)") => ({
     boxShadow: `0 0 24px ${color}, inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
   }),
 

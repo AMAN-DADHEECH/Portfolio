@@ -18,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#030712] text-slate-100 selection:bg-[#fcee0a] selection:text-black">
+    <main className="relative min-h-screen overflow-x-clip text-ink">
       <Navbar />
       <Hero onCopySuccess={handleCopyToast} />
       <BentoAbout />

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { X, ExternalLink, CheckCircle2, Layers, Cpu } from "lucide-react";
+import { X, ExternalLink, Check, Layers, Cpu } from "lucide-react";
 import { GithubIcon } from "./common/Icons";
 import { Project } from "@/data/portfolioData";
 import { Badge } from "./common/Badge";
@@ -13,21 +13,17 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({
-  project,
-  isOpen,
-  onClose,
-}) => {
+export const ProjectModal: React.FC<ProjectModalProps> = ({ project, isOpen, onClose }) => {
   useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = prev;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
@@ -35,89 +31,88 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   if (!isOpen || !project) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="project-modal-title"
+    >
       {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-md transition-opacity"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-canvas/75 backdrop-blur-md animate-fade-in" onClick={onClose} />
 
-      {/* Modal Dialog */}
-      <div className="relative w-full max-w-2xl bg-[#040814] border border-cyan-500/40 rounded-xl shadow-[0_0_50px_rgba(0,240,255,0.25)] overflow-hidden z-10 my-8 animate-in fade-in zoom-in-95 duration-200 hud-frame">
-        {/* Cyber Hazard Header bar */}
-        <div className="h-2 w-full cyber-hazard-sm" />
+      {/* Dialog — bottom sheet on mobile, centred card on larger screens */}
+      <div className="glass relative z-10 w-full sm:max-w-2xl max-h-[92dvh] sm:max-h-[88dvh] flex flex-col rounded-t-3xl sm:rounded-3xl bg-canvas-2/95 animate-scale-in overflow-hidden">
+        <div className="h-px w-full bg-gilded opacity-70" />
+        {/* Grab handle (mobile) */}
+        <div className="sm:hidden mx-auto mt-2.5 h-1 w-10 rounded-full bg-line-strong" />
 
-        <div className="p-6 sm:p-8">
-          {/* Top Bar */}
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2 flex-wrap">
-                <Badge variant="yellow" size="sm">
-                  {project.category}
-                </Badge>
-                {project.badge && (
-                  <Badge variant="cyan" size="sm">
-                    {project.badge}
-                  </Badge>
-                )}
-              </div>
-              <h3 className="text-2xl font-black font-mono uppercase text-white tracking-tight">
-                {project.title}
-              </h3>
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4 px-5 sm:px-8 pt-5 sm:pt-7 pb-4">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <Badge variant="gold" size="sm">{project.category}</Badge>
+              {project.badge && <Badge variant="cyan" size="sm">{project.badge}</Badge>}
             </div>
-            <button
-              onClick={onClose}
-              className="text-slate-400 hover:text-[#ff0055] p-2 bg-[#070c18] border border-cyan-500/30 hover:border-[#ff0055]/50 transition-colors cyber-cut-sm"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
+            <h3 id="project-modal-title" className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink">
+              {project.title}
+            </h3>
+            <p className="font-display italic text-lg text-ink-muted mt-1">{project.tagline}</p>
           </div>
+          <button
+            onClick={onClose}
+            className="grid place-items-center h-10 w-10 shrink-0 rounded-full border border-line bg-surface text-ink-muted hover:text-ink hover:bg-surface-2 transition-colors cursor-pointer"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
 
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 font-sans">
+        {/* Scrollable body */}
+        <div className="flex-1 overflow-y-auto px-5 sm:px-8 pb-6">
+          <p className="text-ink-muted text-[15px] sm:text-base leading-relaxed mb-6 text-pretty">
             {project.description}
           </p>
 
-          {/* Architectural Key Points */}
-          <div className="mb-6 bg-[#070c18] border border-cyan-500/20 rounded-lg p-4 sm:p-5">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#fcee0a] flex items-center gap-2 mb-3">
-              <Cpu className="w-4 h-4 text-[#fcee0a]" /> // Architectural Telemetry & Systems
+          <div className="mb-6 rounded-2xl border border-line bg-surface p-4 sm:p-5">
+            <h4 className="eyebrow flex items-center gap-2 mb-4">
+              <Cpu className="w-3.5 h-3.5 text-gold" /> Architecture &amp; highlights
             </h4>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3">
               {project.features.map((feat, idx) => (
-                <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-300 font-mono">
-                  <CheckCircle2 className="w-4 h-4 text-[#00ff66] shrink-0 mt-0.5" />
+                <li key={idx} className="flex items-start gap-2.5 text-sm text-ink-muted leading-relaxed">
+                  <span className="mt-0.5 grid place-items-center h-4 w-4 rounded-full bg-mint/15 shrink-0">
+                    <Check className="w-2.5 h-2.5 text-mint" />
+                  </span>
                   <span>{feat}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Tech Stack */}
-          <div className="mb-8">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2 mb-2.5">
-              <Layers className="w-4 h-4 text-cyan-400" /> // Stack Modules
+          <div>
+            <h4 className="eyebrow flex items-center gap-2 mb-3">
+              <Layers className="w-3.5 h-3.5 text-champagne" /> Stack
             </h4>
             <div className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
-                <Badge key={tech} variant="subtle" size="sm">
-                  {tech}
-                </Badge>
+                <Badge key={tech} variant="subtle" size="sm">{tech}</Badge>
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Action CTAs */}
-          <div className="flex items-center justify-end gap-3 pt-4 border-t border-cyan-500/20">
+        {/* Actions */}
+        {(project.githubUrl || project.liveUrl) && (
+          <div className="flex flex-col-reverse min-[420px]:flex-row min-[420px]:justify-end gap-2 px-5 sm:px-8 py-4 border-t border-line pb-[max(1rem,env(safe-area-inset-bottom))]">
             {project.githubUrl && (
               <Button
-                variant="outline"
+                variant="secondary"
                 size="md"
                 href={project.githubUrl}
                 external
-                icon={<GithubIcon className="w-4 h-4 text-cyan-400" />}
+                icon={<GithubIcon className="w-4 h-4" />}
               >
-                Repo Source
+                View source
               </Button>
             )}
             {project.liveUrl && (
@@ -128,11 +123,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 external
                 iconRight={<ExternalLink className="w-4 h-4" />}
               >
-                Launch Production
+                Visit live site
               </Button>
             )}
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
