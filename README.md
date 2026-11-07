@@ -15,7 +15,7 @@ Runs the TypeScript compiler (`tsc --noEmit`) to verify all types, props, compon
 Runs TypeScript in watch mode so type-checking runs continuously as you edit code.
 
 ### `npm run dev`
-Starts the Next.js local development server with Turbopack on [http://localhost:3000](http://localhost:3000).
+Starts the Next.js local development server with Turbopack on [http://localhost:7177](http://localhost:7177).
 
 ### `npm run build`
 Creates an optimized production build with static route generation.
